@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
+  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+  <style>
+    body { margin:0; padding:0; }
+    #map { position:absolute; top:0; bottom:0; right:0; width:50%; }
+    #retinaMap { position:absolute; top:0; bottom:0; left:0; width:50%; }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<div id='retinaMap'></div>
+<script>
+console.log('hi')
+var map = mapbox.map('map').zoom(5);
+var retinaMap = mapbox.map('retinaMap').zoom(5);
+
+
+var retina = window.devicePixelRatio >= 2;
+if (retina) {
+    // Retina tiles are sized 1/2 of normal tiles for twice the pixel
+    // density
+    map.tileSize = { x: 256, y: 256 };
+    // use a retina tileset
+    map.addLayer(mapbox.layer().id('examples.map-zq0f1vuc'));
+} else {
+    // use a standard tileset
+    map.addLayer(mapbox.layer().id('bobbysud.map-ppia20uk'));
+}
+
+var retinascreen = window.devicePixelRatio >= 0;
+if (retinascreen) {
+    // Retina tiles are sized 1/2 of normal tiles for twice the pixel
+    // density
+    retinaMap.tileSize = { x: 128, y: 128 };
+    // use a retina tileset
+    retinaMap.addLayer(mapbox.layer().id('examples.map-zq0f1vuc'));
+} else {
+    // use a standard tileset
+    retinaMap.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
+}
+
+
+
+</script>
+</body>
+</html>
