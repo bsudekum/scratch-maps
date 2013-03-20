@@ -5,7 +5,11 @@
   <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
   <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
   <style>
-    body { margin:0; padding:0; }
+    body {
+      margin:0;
+      padding:0;
+      font-family: helvetica
+    }
     #map { position:absolute; top:0; bottom:0; width:100%; }
   </style>
 </head>
@@ -15,9 +19,9 @@
 
 <script>
 	var map = mapbox.map('map')
-	map.interaction.auto()
+	
 	map.centerzoom({ lat: 33.338, lon: 107.079 }, 5);
-	map.addLayer(mapbox.layer().id('bobbysud.map-9r8vorla'));
+	map.addLayer(mapbox.layer().id('bobbysud.map-9r8vorla',map.interaction.auto));
 	map.addLayer(mapbox.layer().id('bobbysud.map-rekkc1s3'));
 	map.ui.hash.add()
 </script>
