@@ -7,45 +7,55 @@
     body { margin:0; padding:0;}
     #map { position:absolute; top:0; bottom:0; right:0; width:50%; }
     #retinaMap { position:absolute; top:0; bottom:0; left:0; width:50%; }
-    #screen-quality {
+    .left {
+        left:0;
+    }
+    .right {
+        right:0;
+    }
+    .text {
+        font-size: 20px;
+        padding: 2px;
         z-index: 5;
         position: absolute;
         margin: 15px;
         font-family:helvetica;
         background: white;
-        text-align: center;
-        right:0;
+        text-align: right;
+    }
+    small{
+        font-size: 12px;
     }
   </style>
 </head>
 <body>
     <div id='map'></div>
     <div id='retinaMap'></div>
-    <div id='screen-quality'></div>
+    <div class='text left'>Tile: <strong>256px x 256px</strong></div>
+    <div class='text right'>
+        Tile:<strong>128px x 128px</strong>
+        <br>
+        <small>Try viewing on a retina device!</small>
+    </div>
 <script>
 console.log('hi')
 var map = mapbox.map('map').zoom(5);
 var retinaMap = mapbox.map('retinaMap').zoom(5);
 
-
-var retina = window.devicePixelRatio >= 2;
-var screenQuality = document.getElementById('screen-quality')
-
+var retina = window.devicePixelRatio >= 0;
 if (retina) {
     // Retina tiles are sized 1/2 of normal tiles for twice the pixel
     // density
     map.tileSize = { x: 128, y: 128 };
     // use a retina tileset
     map.addLayer(mapbox.layer().id('examples.map-zq0f1vuc'));    
-    document.getElementById('screen-quality').innerHTML = 'Nice You are looking at Retina tiles';
 } else {
     // use a standard tileset
     map.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
-    console.log('Sorry you do not have a retina screen')
-    document.getElementById('screen-quality').innerHTML = 'Sorry you do not have a retina screen';
 }
 
-retinaMap.addLayer(mapbox.layer().id('examples.map-vyofok3q'));
+
+retinaMap.addLayer(mapbox.layer().id('examples.map-zq0f1vuc'));
 
 map.centerzoom({ lat: 48.8556, lon: 2.3548 }, 14);
 retinaMap.centerzoom({ lat: 48.8556, lon: 2.3548 }, 14);
